@@ -1,0 +1,55 @@
+.main {
+  @apply bg-neutral min-h-[calc(100vh-111px)] p-10;
+}
+
+.card {
+  @apply rounded-md bg-white mx-auto p-10;
+  max-width: 800px;
+  border: 1px solid var(--color-divider);
+  box-shadow: 1px 1px 4px 0px rgba(235, 230, 225, 0.20);
+
+
+}
+
+.card > h1 {
+  @apply text-font-2 mb-10 row gap-3 justify-center;
+}
+
+.main > footer {
+  @apply mb-[66px] text-center mt-10;
+}
+
+.actions {
+
+
+  .secondaryActions {
+    @apply mt-4 column md:row gap-4 md:gap-6;
+
+    & > button {
+      @apply flex-1;
+      height: 52px !important;
+      min-height: 52px !important;
+      background: var(--color-neutral) !important;
+      font-size: 18px !important;
+      font-weight: 600;
+      gap: 28px;
+    }
+  }
+
+  .question {
+    @apply text-center mt-6 text-font-2;
+
+    a {
+      @apply ms-2;
+    }
+  }
+
+}
+
+.primaryAction {
+  margin-top: 16px !important;
+  height: 52px !important;
+  width: 100% !important;
+  font-size: 20px !important;
+
+}
