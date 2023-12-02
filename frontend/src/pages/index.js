@@ -5,6 +5,7 @@ function HomePage() {
     <div>
       <h1>Welcome to the Egyptian Premier League</h1>
       <p>Explore the latest news, fixtures, and standings.</p>
+      <h2>Latest News</h2>
     </div>
   );
 }
