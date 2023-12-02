@@ -19,7 +19,7 @@ export default function AuthCard({ title, titleHasLogo, children }) {
                 <div>{children}</div>
             </div>
             <footer>
-                Powered By <a href={"https://div-systems.com"}>Div Systems</a>
+                Powered By EPL
             </footer>
         </main>
     );
