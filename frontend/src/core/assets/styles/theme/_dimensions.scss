@@ -1,0 +1,28 @@
+:root {
+  --rounded-xs: 2px;
+  --rounded-sm: 4px;
+  --rounded-md: 10px;
+  --rounded-lg: 20px;
+  --dimension-header-h: 72px;
+  --dimension-nav-w: 253px;
+  --dimension-nav-collapsed-w: 80px;
+  --dimension-nav-w-current: var(--dimension-nav-w);
+
+  --_dimension-home-nav-h-lg: 90px;
+  --_dimension-home-nav-h-md: 80px;
+  --_dimension-home-nav-h-sm: 70px;
+  --dimension-home-nav-h: var(--_dimension-home-nav-h-lg);
+
+}
+@media screen and (max-width: 960px) {
+  :root {
+    --dimension-home-nav-h: var(--_dimension-home-nav-h-md);
+  }
+
+}
+@media screen and (max-width: 640px) {
+  :root {
+    --dimension-home-nav-h: var(--_dimension-home-nav-h-sm);
+  }
+
+}

@@ -1,0 +1,22 @@
+@import "../common/form-item";
+
+.lib-input .ant-input-affix-wrapper {
+  padding-block: 0 !important;
+  @include form-item-wrapper;
+}
+
+.lib-input .ant-input {
+  @include form-item;
+  height: $dimension-h-item;
+}
+
+
+.lib-input input::-webkit-input-placeholder,
+.lib-input input::placeholder {
+  @include form-placeholder;
+}
+
+.form-container[data-size="lg"] .ant-input {
+  @include form-item-lg;
+  height: $item-dimension-h-lg;
+}

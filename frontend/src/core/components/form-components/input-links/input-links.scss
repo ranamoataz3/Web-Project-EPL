@@ -1,0 +1,55 @@
+.lib-input-links {
+
+}
+
+.lib-single-input-link {
+
+
+}
+
+.lib-input-links-wrapper {
+  @apply column;
+  gap: 8px !important;
+}
+
+.single-link-icon-wrapper {
+  @apply pe-[10px] me-[10px] bordered-end h-[24px];
+
+  .single-link-icon {
+    @apply h-full w-[24px]  aspect-square bg-neutral rounded-full p-1;
+  }
+
+  img {
+    @apply h-full w-full;
+  }
+
+}
+
+.lib-input-links button {
+  @apply cursor-pointer opacity-100 hover:opacity-70 transition-all
+  border-none p-0 m-0;
+}
+
+.lib-links-button {
+  @apply row text-[13px] text-primary font-bold gap-1 bg-transparent
+
+
+  mt-1;
+
+
+  span {
+    @apply centered rounded-full bg-white
+  }
+}
+
+.link-remove-button {
+  @apply text-primary bg-white centered rounded-full;
+}
+
+.single-link-wrapper {
+  @apply relative ;
+
+  .link-remove-button {
+    @apply absolute end-[-9px] top-[-9px] z-10  opacity-0;
+  }
+}

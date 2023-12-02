@@ -1,0 +1,84 @@
+@import "../common/form-item";
+
+.ant-input-search, .ant-input-search .ant-input-wrapper, .ant-input-search input, .ant-input-search button {
+  height: 38px !important;
+}
+
+.ant-input-search .ant-input-wrapper {
+  @apply row;
+}
+
+.ant-input-search button {
+  @apply centered bg-background bordered;
+  width: 34px !important;
+  box-shadow: none !important;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  border-start-end-radius: 4px !important;
+  border-end-end-radius: 4px !important;
+
+  padding: 0 !important;
+  min-width: 34px !important;
+  color: var(--color-gray-600);
+  fill: var(--color-gray-600);
+  stroke: var(--color-gray-600);
+
+  svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+.ant-input-search button:hover {
+  color: #57a0ff;
+  fill: #57a0ff;
+  stroke: #57a0ff;
+  background: var(--color-background) !important;
+  border-color: #57a0ff;
+}
+
+.ant-input-search button:active {
+  fill: #1c61d9;
+  border-color: #1c61d9;
+  color: #1c61d9;
+  stroke: #1c61d9;
+}
+
+.ant-input-search input {
+  @include form-item;
+  @include form-item-wrapper;
+  font-size: 14px !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-inline-end: none;
+}
+
+.ant-input-search input::-webkit-input-placeholder,
+.ant-input-search input::placeholder {
+  @include form-placeholder;
+  font-size: 14px !important;
+}
+
+.lib-search {
+  display: flex;
+  flex-direction: row !important;
+  gap: 0 !important;
+}
+
+.lib-search .ant-form-item {
+  height: 38px !important;
+}
+
+.lib-search input {
+  height: 38px !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  position: relative;
+  top: 2.5px;
+}
+
+.lib-search button {
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  margin-inline-start: -1px
+}
