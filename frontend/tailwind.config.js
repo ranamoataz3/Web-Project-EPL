@@ -207,6 +207,7 @@ module.exports = {
         "primary-container-lighter": "var(--color-primary-container-lighter)",
         "on-primary-container": "var(--color-on-primary-container)",
         background: "var(--color-background)",
+        shading: "var(--color-shading)",
         "on-background": "var(--color-on-background)",
         border: "var(--color-border)",
         "font-0": "var(--color-font-0)",
