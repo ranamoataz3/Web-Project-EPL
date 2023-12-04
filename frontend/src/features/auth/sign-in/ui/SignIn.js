@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import styles from "./signin.module.css";
 import Link from "next/link";
+import Button from "@/core/components/button/Button";
 
 const SignIn = () => {
   const initialValues = {
@@ -42,8 +43,8 @@ const SignIn = () => {
           className="bg-neutral"
           type="password"
         />
-        <button type="submit">Submit</button>
-        <Link href="/auth/sign-up" className="block centered">Don't Have an Account ?</Link>
+        <Button type="submit"  className="centered max-w-[100%]">Sign In</Button>
+        <Link href="/auth/sign-up" className="block centered mt-4">Don't Have an Account ?</Link>
       </FormikForm>
     </div>
   );
