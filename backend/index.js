@@ -7,15 +7,29 @@ const cors=require('cors');
 const lodash=require('lodash');
 const fs=require('fs');
 
+const userRouter=require('./Routes/userRoute');
+// const matchRouter=require('./Routes/matchRoute');
+// const officalRouter=require('./Routes/officalRoute');
+// const stadiumRouter=require('./Routes/stadiumRoute');
+
+
 // database connection
 const PORT=3001;
 const connectionString='mongodb+srv://abouelhadidola:wldQXhckBfqpdoK6@consultation2023.fagetcv.mongodb.net/';
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({extended:false}));
 app.use(cors());
+const session = require("express-session");
+app.use(session({
+    secret: "secrethash",
+    resave: false,
+    saveUninitialized: true.valueOf
+}));
+
+
 
 //Connect to the database
-const client=new mongo.MongoClient(connectionString,{useNewUrlParser:true,useUnifiedTopology:true});
+const client=new mongo.MongoClient(connectionString);
 const connectToDatabase=async()=>{
     try{
         await client.connect();
@@ -32,6 +46,15 @@ const connectToDatabase=async()=>{
 };
 
 connectToDatabase();
+
+//////////////////////////Routes//////////////////////////
+app.use('/user',userRouter);
+// app.use('/match',matchRouter);
+// app.use('/offical',officalRouter);
+// app.use('/stadium',stadiumRouter);
+
+
+module.exports=app;
 
 
 
