@@ -70,7 +70,12 @@ const userSchema = new Schema({
         type: Boolean,
         required: false,
         default: false
-    }
+    },
+
+    matches: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Match'
+    }]
 });
 
 userSchema.plugin(uniqueValidator);
