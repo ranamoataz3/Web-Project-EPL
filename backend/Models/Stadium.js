@@ -27,4 +27,4 @@ const stadiumSchema = new Schema({
 });
 
 stadiumSchema.plugin(uniqueValidator);
-modules.exports = mongoose.model('Stadium', stadiumSchema);
+module.exports = mongoose.model('Stadium', stadiumSchema);
