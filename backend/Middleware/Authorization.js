@@ -13,7 +13,7 @@ const authorization = async (req, res, next) => {
         //getting rid of the bearer
         if (req.headers.authorization) {
             const headerToken = req.headers.authorization.split(" ")[1];
-            await jwt.verify(headerToken, process.env.JWT_KEY, async (err, decoded) => {
+            await jwt.verify(headerToken, "secrethash", async (err, decoded) => {
                 if (err) {
                     return res.status(401).json({message: 'Your token is invalid, your are not authorized!'});
                 }
