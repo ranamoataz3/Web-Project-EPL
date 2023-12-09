@@ -1,0 +1,38 @@
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding-bottom: 44px;
+}
+
+.boxContainer:has(p) > *:nth-child(1) > *:nth-child(2) > *:nth-child(3){
+  border: solid 1px var(--color-red) !important;
+  border-bottom: solid 2px var(--color-red) !important;
+  transition: 1ms !important;
+}
+
+.boxContainer:has(p) > *:nth-child(1) > label {
+  color: var(--color-red) !important;
+}
+
+.boxContainer:has(p) .label {
+  color: var(--color-red);
+  top: 0px;
+}
+
+.boxContainer p {
+  @apply paragraph2;
+  color: var(--color-red);
+}
+
+@media screen and (max-width: 860px) {
+  .boxContainer {
+    padding-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .boxContainer {
+    padding-bottom: 24px;
+  }
+}

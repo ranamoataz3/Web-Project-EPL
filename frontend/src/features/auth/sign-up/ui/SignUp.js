@@ -5,6 +5,9 @@ import * as Yup from "yup";
 import Link from "next/link";
 import Button from "@/core/components/button/Button";
 import RadioButton from "@/core/components/web-form/radiobutton/RadioButton";
+import moment from "moment";
+import DateInput from "@/core/components/web-form/date/DateInput";
+import { Formik } from "formik";
 
 const SignUp = () => {
   const genderOptions = [
@@ -17,7 +20,7 @@ const SignUp = () => {
     emailAddress: "",
     firstName: "",
     lastName: "",
-    birthdate: "",
+    birthdate: moment().subtract(10, "years").format("YYYY-MM-DD"),
     gender: "male",
     city: "",
     address: "",
@@ -32,13 +35,26 @@ const SignUp = () => {
       .required(" Email field is required"),
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
-    // birthdate: Yup.string().required("Birthdate is required"),
+    birthdate: Yup.date()
+      .min(
+        moment("1930-01-01").format("YYYY-MM-DD"),
+        "Birth date must be later than " +
+          moment("1930-01-01").format("DD-MM-YYYY")
+      )
+      .max(
+        moment().subtract(10, "years").format("YYYY-MM-DD"),
+        "Birth date must be before than " +
+          moment().subtract(10, "years").format("MM-DD-YYYY")
+      )
+      .required("Birth Date is required."),
     gender: Yup.string().required("Gender is required"),
     city: Yup.string().required("City is required"),
-    password: Yup.string().min(8).required("Field required"),
+    password: Yup.string().min(8, "Min 8 chars").required("Field required"),
   });
 
   const handleSubmit = (data, { setErrors }) => {
+    let birthdate = new Date(data.birthdate);
+    data.birthdate = birthdate;
     console.log(data);
   };
 
@@ -54,39 +70,43 @@ const SignUp = () => {
         placeholder="Enter your username"
         className="bg-neutral"
       />
-      <div>
-        <InputField
-          label="Email Address"
-          name="emailAddress"
-          placeholder="Enter your email address"
-          className="bg-neutral"
-        />
-        <InputField
-          label="First Name"
-          name="firstName"
-          placeholder="Enter your First Name"
-          className="bg-neutral"
-        />
-        <InputField
-          label="Last Name"
-          name="lastName"
-          placeholder="Enter your Last Name"
-          className="bg-neutral"
-        />
-        <RadioButton label="Gender" name="gender" options={genderOptions} />
-        <InputField
-          label="City"
-          name="city"
-          placeholder="Enter your City"
-          className="bg-neutral"
-        />
-        <InputField
-          label="Address"
-          name="address"
-          placeholder="Enter your Address"
-          className="bg-neutral"
-        />
-      </div>
+      <InputField
+        label="Email Address"
+        name="emailAddress"
+        placeholder="Enter your email address"
+        className="bg-neutral"
+      />
+
+      <InputField
+        label="First Name"
+        name="firstName"
+        placeholder="Enter your First Name"
+        className="bg-neutral"
+      />
+      <InputField
+        label="Last Name"
+        name="lastName"
+        placeholder="Enter your Last Name"
+        className="bg-neutral"
+      />
+      <RadioButton label="Gender" name="gender" options={genderOptions} />
+      <DateInput
+        label="Birth Date"
+        name="birthdate"
+        date={initialValues.birthdate}
+      />
+      <InputField
+        label="City"
+        name="city"
+        placeholder="Enter your City"
+        className="bg-neutral"
+      />
+      <InputField
+        label="Address"
+        name="address"
+        placeholder="Enter your Address"
+        className="bg-neutral"
+      />
 
       <InputField
         label="Password"
