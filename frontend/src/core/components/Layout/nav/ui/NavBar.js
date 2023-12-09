@@ -1,7 +1,6 @@
 import styles from "./nav.module.css";
 import NavData from "../data/NavData";
 import Link from "next/link";
-
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Hamburger from "@/core/components/hamburger/Hamburger";
@@ -16,11 +15,16 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
     <nav id="nav" className={styles.container}>
       <div className={styles.brandcontainer}>
         <Link href="/" onClick={() => setOpenmenu(false)}>
-          <Image src="/imgs/mainlogo2.png" width={120} height={100} alt="Brand" />
+          <Image
+            src="/imgs/mainlogo2.png"
+            width={120}
+            height={100}
+            alt="Brand"
+          />
         </Link>
       </div>
       <ul className={styles.menucontainer}>
-        {NavData.map((element, index) => {
+        {NavData.admin.map((element, index) => {
           return (
             <Link
               key={element.name}
@@ -43,7 +47,7 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
           openmenu ? styles.displaymobilenav : styles.hidemobilenav
         }`}
       >
-        {NavData.map((element, index) => {
+        {NavData.admin.map((element, index) => {
           return (
             <Link
               key={element.name}

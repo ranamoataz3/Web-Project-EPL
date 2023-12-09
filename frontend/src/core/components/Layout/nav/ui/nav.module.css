@@ -1,10 +1,10 @@
 .container {
   font-size: 20px;
   font-weight: 600;
-  padding: 32px 64px;
+  padding: 16px 64px;
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-white);
+  background-color: var(--color-neutral);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -23,14 +23,17 @@
 
 .navitemlink {
   color: var(--color-font-1);
-  padding: 2.4rem 1.2rem;
+  padding: 32px 16px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navitemlink:hover {
   border-radius: 4px;
   background: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-neutral);
 }
 
 .menuicon {
@@ -42,10 +45,10 @@
 .mobilenav {
   position: fixed;
   inset: 0;
-  top: 150px;
+  top: 140px;
   border-top: 1px solid 1px solid var(--color-border);
   overflow: hidden;
-  background-color: var(--color-white);
+  background-color: var(--color-neutral);
   display: flex;
   flex-direction: column;
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -71,7 +74,7 @@
 
 @media screen and (max-width: 760px) {
   .container {
-    padding: 24px 16px;
+    padding: 16px 16px;
   }
 
   .menucontainer {
@@ -81,7 +84,7 @@
 
 @media screen and (min-width: 760px) and (max-width: 1200px) {
   .container {
-    padding: 24px 64px;
+    padding: 16px 32px;
   }
 
   .menucontainer {
