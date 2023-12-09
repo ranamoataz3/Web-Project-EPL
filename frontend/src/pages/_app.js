@@ -1,5 +1,6 @@
 import "@/core/assets/styles/globals.scss";
-import {Montserrat} from "next/font/google";
+import Layout from "@/core/components/Layout/Layout";
+import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -10,7 +11,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <div className={montserrat.variable}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </div>
     </>
   );
