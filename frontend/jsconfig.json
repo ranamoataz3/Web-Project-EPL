@@ -1,7 +1,42 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "~/*": [
+        "./*"
+      ],
+      "@core/*": [
+        "./src/core/*"
+      ],
+      "@utils/*": [
+        "./src/core/utils/*"
+      ],
+      "@styles/*": [
+        "./src/core/assets/styles/*"
+      ],
+      "@icons": [
+        "./src/core/assets/icons"
+      ],
+      "@theme/*": [
+        "./src/core/assets/styles/theme/*"
+      ],
+      "@colors": [
+        "./src/core/assets/styles/theme/colors"
+      ],
+      "@components/*": [
+        "./src/core/components/*"
+      ],
+      "@api-client": [
+        "./src/core/utils/api-client/index"
+      ],
+      "@features/*": [
+        "./src/features/*"
+      ],
+      "@teacher/*": [
+        "./src/features/teacher/*"
+      ]
     }
   }
 }

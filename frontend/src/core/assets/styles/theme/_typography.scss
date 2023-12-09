@@ -1,0 +1,18 @@
+html, body, * {
+  font-family: var(--font-montserrat), sans-serif;
+  letter-spacing: 1px;
+}
+
+span, strong, strike {
+  font-family: inherit;
+}
+
+.title {
+  font-family: var(--font-merriweather), sans-serif;
+}
+
+.title strong {
+  font-weight: inherit;
+  color: var(--color-primary);
+}
+
