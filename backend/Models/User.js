@@ -3,6 +3,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
 
+
 const userSchema = new Schema({
 
     username: {
@@ -31,7 +32,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minlength: 8,
-        maxlength: 20
+        maxlength: 200
     },
 
     email: {
@@ -80,4 +81,4 @@ const userSchema = new Schema({
 
 userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = User = mongoose.model('User', userSchema);
