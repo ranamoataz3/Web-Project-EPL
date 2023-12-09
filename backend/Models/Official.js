@@ -24,4 +24,4 @@ const officialSchema = new Schema({
 
 officialSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('Official', officialSchema);
+module.exports = Official= mongoose.model('Official', officialSchema);

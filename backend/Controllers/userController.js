@@ -1,5 +1,6 @@
 const User = require('../Models/User');
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 const password = "Admin@123";
 
@@ -23,10 +24,10 @@ const signUp = async (req, res) => {
         }
 
         // check for duplicate emails
-        const isDuplicate = await User.findOne({email: req.body.email})
+        const isDuplicate= await User.findOne({email: req.body.email})
         if (isDuplicate)
         {
-            return res.status(400).send("Email already exists");
+            return res.status(400).send("Email already exists, please login");
         }
 
         // encrypt password using bycrypt
@@ -70,8 +71,8 @@ const login = async (req, res) => {
         const token = jwt.sign({ _id: user._id.toString() }, "secrethash", {
             expiresIn: "24h"
         });
-
-        return res.status(200).json({ token, user });
+        const SuccessMessage = "Logged in successfully";
+        return res.status(200).json({ SuccessMessage,token});
 
     } catch (err) {
         // Handle errors

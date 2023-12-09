@@ -78,4 +78,4 @@ const matchSchema = new Schema({
 });
 
 matchSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('Match', matchSchema);
+module.exports = Match = mongoose.model('Match', matchSchema);

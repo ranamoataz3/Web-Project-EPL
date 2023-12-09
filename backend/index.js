@@ -15,7 +15,7 @@ const userRouter=require('./Routes/userRoute');
 
 // database connection
 const PORT=3001;
-const connectionString='mongodb+srv://abouelhadidola:wldQXhckBfqpdoK6@consultation2023.fagetcv.mongodb.net/';
+const connectionString='mongodb+srv://abouelhadidola:wldQXhckBfqpdoK6@consultation2023.fagetcv.mongodb.net/?retryWrites=true&w=majority';
 
 app.use(bodyParser.json({extended:false}));
 app.use(cors());
@@ -29,10 +29,10 @@ app.use(session({
 
 
 //Connect to the database
-const client=new mongo.MongoClient(connectionString);
+mongoose.set('strictQuery', true);
 const connectToDatabase=async()=>{
     try{
-        await client.connect();
+        await mongoose.connect(connectionString,{useNewUrlParser: true, useUnifiedTopology: true});
         console.log('Connected to the database successfully');
         //Start the server
         const server=app.listen(PORT,()=>console.log(`Server is running on port ${PORT}`));

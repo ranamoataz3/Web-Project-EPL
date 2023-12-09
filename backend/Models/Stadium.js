@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
 
 
+
 const stadiumSchema = new Schema({
 
     width:
@@ -27,4 +28,4 @@ const stadiumSchema = new Schema({
 });
 
 stadiumSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('Stadium', stadiumSchema);
+module.exports = Stadium = mongoose.model('Stadium', stadiumSchema);
