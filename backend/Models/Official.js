@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 
 const officialSchema = new Schema({
 
+    // type is only "Lineman" or "Referee"
     type:
     {
         type: String,
@@ -18,7 +19,12 @@ const officialSchema = new Schema({
         required: true,
         minlength: 3,
         maxlength: 20
-    }
+    },
+    matches:
+    [{
+        type: Schema.Types.ObjectId,
+        ref: 'Match'
+    }]
 
 });
 

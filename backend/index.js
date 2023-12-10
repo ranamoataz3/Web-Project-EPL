@@ -9,7 +9,7 @@ const fs=require('fs');
 
 const userRouter=require('./Routes/userRoute');
 // const matchRouter=require('./Routes/matchRoute');
-// const officalRouter=require('./Routes/officalRoute');
+const officialRouter=require('./Routes/officialRoute');
 // const stadiumRouter=require('./Routes/stadiumRoute');
 
 
@@ -50,7 +50,7 @@ connectToDatabase();
 //////////////////////////Routes//////////////////////////
 app.use('/user',userRouter);
 // app.use('/match',matchRouter);
-// app.use('/offical',officalRouter);
+app.use('/official',officialRouter);
 // app.use('/stadium',stadiumRouter);
 
 
