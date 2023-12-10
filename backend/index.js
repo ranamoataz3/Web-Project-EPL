@@ -8,7 +8,7 @@ const lodash=require('lodash');
 const fs=require('fs');
 
 const userRouter=require('./Routes/userRoute');
-// const matchRouter=require('./Routes/matchRoute');
+const matchRouter=require('./Routes/matchRoute');
 const officialRouter=require('./Routes/officialRoute');
 const stadiumRouter=require('./Routes/stadiumRoute');
 
@@ -49,7 +49,7 @@ connectToDatabase();
 
 //////////////////////////Routes//////////////////////////
 app.use('/user',userRouter);
-// app.use('/match',matchRouter);
+app.use('/match', matchRouter);
 app.use('/official',officialRouter);
 app.use('/stadium',stadiumRouter);
 

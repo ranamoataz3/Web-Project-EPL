@@ -1,0 +1,2 @@
+const Teams=["Pyramids","AL Ahly SC","El Geish","Ceramica Cleopatra","Zed FC","Modern Future FC","Al Ittehad","Smouha","Al Masry","Zamalek SC","El Gounah","ENPPI","Baladiyet El Mahallah","Ismaily","Pharco","El Dakhlia FC","Al Mokawloon","National Bank Of Egypt"]
+module.exports=Teams;

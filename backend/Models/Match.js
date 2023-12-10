@@ -71,9 +71,7 @@ const matchSchema = new Schema({
         {
             return [[]]; // Default empty seats matrix if stadium dimensions are missing
         }
-        },
-
-
+        }
     }    
 });
 
