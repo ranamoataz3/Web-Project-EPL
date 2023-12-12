@@ -8,8 +8,13 @@ matchRouter.post('/addMatch', authorization, matchController.addMatch);
 // delete a match
 matchRouter.delete('/deleteMatch/:id', authorization, matchController.deleteMatch);
 // get all matches
-matchRouter.get('/getMatches', authorization, matchController.getMatches);
+// guest can view
+matchRouter.get('/getMatches', matchController.getMatches);
 // get a certain match
-matchRouter.get('/getMatch/:id', authorization, matchController.getMatch);
+// guest can view
+matchRouter.get('/getMatch/:id', matchController.getMatch);
+
+// // reserve seats at a match
+// matchRouter.post('/reserveSeats/:id', authorization, matchController.reserveSeats);
 
 module.exports = matchRouter;

@@ -175,5 +175,15 @@ const getMatch=async (req,res)=>{
     }
 };
 
+// const reserveSeats=async (req,res)=>{
+//     // get the match
+//     const match = await Match.findById(req.params.id);
+//     if (!match) {
+//         return res.status(404).send("Match not found");
+//     }
+
+
+// };
+
 
 module.exports = {addMatch, deleteMatch, getMatches, getMatch};
