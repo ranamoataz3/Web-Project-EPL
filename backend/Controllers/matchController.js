@@ -175,6 +175,7 @@ const getMatch=async (req,res)=>{
     }
 };
 
+
 // const reserveSeats=async (req,res)=>{
 //     // get the match
 //     const match = await Match.findById(req.params.id);
