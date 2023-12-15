@@ -190,7 +190,7 @@ const reserveSeats=async (req,res)=>{
 
     // out of bounds error
     for (let i = 0; i < seats.length; i++) {
-        if (seats[i].row >= match.seats.length || seats[i].column >= match.seats[0].length) {
+        if ((seats[i].row)-1 >= match.seats.length || (seats[i].column)-1 >= match.seats[0].length) {
             return res.status(400).send("Invalid seat");
         }
     }
