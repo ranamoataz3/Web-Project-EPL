@@ -176,17 +176,37 @@ const getMatch=async (req,res)=>{
 };
 
 
-// const reserveSeats=async (req,res)=>{
-//     // get the match
-//     const match = await Match.findById(req.params.id);
-//     if (!match) {
-//         return res.status(404).send("Match not found");
-//     }
+const reserveSeats=async (req,res)=>{
+    // get the match
+    const match = await Match.findById(req.params.id);
+    if (!match) {
+        return res.status(404).send("Match not found");
+    }
 
-// // array of objects x and y
+// array of objects row and column, each object represents a seat
+    const seats=req.body.seats;
+    // check if the seats are valid
+    // check if the seats are in the seats matrix
+
+    // out of bounds error
+    for (let i = 0; i < seats.length; i++) {
+        if (seats[i].row >= match.seats.length || seats[i].column >= match.seats[0].length) {
+            return res.status(400).send("Invalid seat");
+        }
+    }
+    // check if the seats are already reserved
+    for (let i = 0; i < seats.length; i++) {
+        if (match.seats[seats[i].row][seats[i].column] == true) {
+            return res.status(400).send("Seat already reserved");
+        }
+    }
+    // reserve the seats
+    for (let i = 0; i < seats.length; i++) {
+        match.seats[seats[i].row][seats[i].column] = true;
+    }
+    await match.save();
+    return res.status(200).send("Seats reserved successfully");
+};
 
 
-// };
-
-
-module.exports = {addMatch, deleteMatch, getMatches, getMatch};
+module.exports = {addMatch, deleteMatch, getMatches, getMatch, reserveSeats};
