@@ -17,6 +17,6 @@ matchRouter.get('/getMatches', matchController.getMatches);
 matchRouter.get('/getMatch/:id', matchController.getMatch);
 
 // // reserve seats at a match
-// matchRouter.post('/reserveSeats/:id', authorization, matchController.reserveSeats);
+matchRouter.post('/reserveSeats/:id', authorization, matchController.reserveSeats);
 
 module.exports = matchRouter;

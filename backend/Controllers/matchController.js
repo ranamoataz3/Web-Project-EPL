@@ -196,13 +196,13 @@ const reserveSeats=async (req,res)=>{
     }
     // check if the seats are already reserved
     for (let i = 0; i < seats.length; i++) {
-        if (match.seats[seats[i].row][seats[i].column] == true) {
+        if (match.seats[(seats[i].row)-1][(seats[i].column)-1] == true) {
             return res.status(400).send("Seat already reserved");
         }
     }
     // reserve the seats
     for (let i = 0; i < seats.length; i++) {
-        match.seats[seats[i].row][seats[i].column] = true;
+        match.seats[(seats[i].row)-1][(seats[i].column)-1] = true;
     }
     await match.save();
     return res.status(200).send("Seats reserved successfully");
