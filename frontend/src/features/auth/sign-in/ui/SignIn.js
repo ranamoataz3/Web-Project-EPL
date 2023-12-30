@@ -5,8 +5,14 @@ import * as Yup from "yup";
 import styles from "./signin.module.css";
 import Link from "next/link";
 import Button from "@/core/components/button/Button";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
+  const user = useSelector((state) => state.user);
+  const router = useRouter();
+
   const initialValues = {
     emailAddress: "",
     password: "",
@@ -21,6 +27,12 @@ const SignIn = () => {
   });
 
   const handleSubmit = (data, { setErrors }) => {};
+
+  useEffect(() => {
+    if (user.loggedIn) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <AuthCard
@@ -41,7 +53,11 @@ const SignIn = () => {
         className="bg-neutral"
         type="password"
       />
-      <Button type="submit" className="centered max-w-[100%]">
+      <Button
+        type="submit"
+        className="centered max-w-[100%]"
+        btnclassName="rounded-sm"
+      >
         Sign In
       </Button>
       <Link href="/auth/sign-up" className="block centered mt-4">

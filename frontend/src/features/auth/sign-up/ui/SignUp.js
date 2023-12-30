@@ -8,8 +8,14 @@ import RadioButton from "@/core/components/web-form/radiobutton/RadioButton";
 import moment from "moment";
 import DateInput from "@/core/components/web-form/date/DateInput";
 import { Formik } from "formik";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
+  const user = useSelector((state) => state.user);
+  const router = useRouter();
+
   const genderOptions = [
     { label: "Male", value: "male", selected: true },
     { label: "Female", value: "female", selected: false },
@@ -57,6 +63,12 @@ const SignUp = () => {
     data.birthdate = birthdate;
     console.log(data);
   };
+
+  useEffect(() => {
+    if (user.loggedIn) {
+      router.push('/');
+    }
+  }, []);
 
   return (
     <AuthCard
@@ -115,7 +127,11 @@ const SignUp = () => {
         className="bg-neutral"
         type="password"
       />
-      <Button type="submit" className="centered max-w-[100%]">
+      <Button
+        type="submit"
+        className="centered max-w-[100%]"
+        btnclassName="rounded-sm"
+      >
         Sign UP
       </Button>
       <Link href="/auth/sign-in" className="block centered mt-4">

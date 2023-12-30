@@ -6,10 +6,14 @@ import { useState, useEffect } from "react";
 import Hamburger from "@/core/components/hamburger/Hamburger";
 // pages/index.js (or any other component)
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const NavBar = ({ openmenu, setOpenmenu }) => {
   const router = useRouter();
   const currentPath = router.pathname;
+  const user = useSelector((state) => state.user);
+
+  const navItems = user.isAdmin ? NavData.admin : NavData.fan;
 
   return (
     <nav id="nav" className={styles.container}>
@@ -24,7 +28,7 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
         </Link>
       </div>
       <ul className={styles.menucontainer}>
-        {NavData.admin.map((element, index) => {
+        {navItems.items.map((element, index) => {
           return (
             <Link
               key={element.name}
@@ -36,6 +40,11 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
             </Link>
           );
         })}
+        {navItems.components
+          ? navItems.components.map((element) => {
+              return element.component;
+            })
+          : null}
       </ul>
 
       <div className={styles.menuicon}>
@@ -47,7 +56,7 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
           openmenu ? styles.displaymobilenav : styles.hidemobilenav
         }`}
       >
-        {NavData.admin.map((element, index) => {
+        {navItems.items.map((element, index) => {
           return (
             <Link
               key={element.name}
@@ -60,6 +69,11 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
             </Link>
           );
         })}
+        {navItems.components
+          ? navItems.components.map((element) => {
+              return element.component;
+            })
+          : null}
       </ul>
     </nav>
   );

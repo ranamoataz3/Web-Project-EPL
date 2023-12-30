@@ -6,7 +6,7 @@ const Button = (props) => {
     <div className={`${props.className}`}>
       {" "}
       <button
-        className={`${styles.button} w-full centered`}
+        className={`${styles.button} w-full centered ${props.btnclassName}`}
         type={props.type ? props.type : "button"}
       >
         {props.children}
