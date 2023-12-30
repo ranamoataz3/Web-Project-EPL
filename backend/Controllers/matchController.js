@@ -105,6 +105,108 @@ const addMatch = async (req, res) => {
     }
 };
 
+// delete match
+const deleteMatch= async (req,res)=>{
+    // check if the user is logged in and an admin
+    // you are given the isAdmin field and the userId field from the authorization middleware
+    if (!req.isAdmin) {
+        return res.status(401).send("You are not an admin");
+    }
+    // find the match with the id and delete it
+    try{
+        const match = await Match.findById(req.params.id);
+        if (!match) {
+            return res.status(404).send("Match not found");
+        }
+        // remove the match from the stadium matches array
+        const stadium = await Stadium.findById(match.stadium);
+        stadium.matches.pull(match);
+        await stadium.save();
+        // remove the match from the linesmen and the referee matches array
+        const referee = await Official.findById(match.referee);
+        referee.matches.pull(match);
+        await referee.save();
+        const linesmen = await Official.find({ _id: { $in: match.linesmen } });
+        linesmen[0].matches.pull(match);
+        await linesmen[0].save();
+        linesmen[1].matches.pull(match);
+        await linesmen[1].save();
+        // delete the match, find by id and delete
+        await Match.findByIdAndDelete(req.params.id);
+        return res.status(200).send("Match deleted successfully"); 
+    }
+    catch(err)
+    {
+        return res.status(500).send(err.message);
+    }
+
+};
+
+// get all matches
+const getMatches=async (req,res)=>{
+
+    // get all the matches and all the info in them from the other models
+    try{
+        const matches=await Match.find().populate('stadium').populate('referee').populate('linesmen');
+        return res.status(200).send(matches);
+    }
+    catch(err)
+    {
+        return res.status(500).send(err.message);
+    }
+
+};
+
+// get match by id
+const getMatch=async (req,res)=>{
+
+    // get the match and all the info in it from the other models
+    try{
+        const match=await Match.findById(req.params.id).populate('stadium').populate('referee').populate('linesmen');
+        if(!match)
+        {
+            return res.status(404).send("Match not found");
+        }
+        return res.status(200).send(match);
+    }
+    catch(err)
+    {
+        return res.status(500).send(err.message);
+    }
+};
 
 
-module.exports = {addMatch};
+const reserveSeats=async (req,res)=>{
+    // get the match
+    const match = await Match.findById(req.params.id);
+    if (!match) {
+        return res.status(404).send("Match not found");
+    }
+
+// array of objects row and column, each object represents a seat
+    const seats=req.body.seats;
+    // check if the seats are valid
+    // check if the seats are in the seats matrix
+
+    // out of bounds error
+    for (let i = 0; i < seats.length; i++) {
+        if ((seats[i].row)-1 >= match.seats.length || (seats[i].column)-1 >= match.seats[0].length) {
+            return res.status(400).send("Invalid seat");
+        }
+    }
+    // check if the seats are already reserved
+    for (let i = 0; i < seats.length; i++) {
+        if (match.seats[(seats[i].row)-1][(seats[i].column)-1] == true) {
+            return res.status(400).send("Seat already reserved");
+        }
+    }
+    // reserve the seats
+    for (let i = 0; i < seats.length; i++) {
+        match.seats[(seats[i].row)-1][(seats[i].column)-1] = true;
+    }
+    await match.save();
+    return res.status(200).send("Seats reserved successfully");
+};
+
+
+module.exports = {addMatch, deleteMatch, getMatches, getMatch, reserveSeats};
