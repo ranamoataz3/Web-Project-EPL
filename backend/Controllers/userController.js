@@ -72,7 +72,7 @@ const login = async (req, res) => {
             expiresIn: "24h"
         });
         const SuccessMessage = "Logged in successfully";
-        return res.status(200).json({ SuccessMessage,token});
+        return res.status(200).json({ SuccessMessage,token,user});
 
     } catch (err) {
         // Handle errors
