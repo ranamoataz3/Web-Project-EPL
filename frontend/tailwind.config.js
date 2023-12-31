@@ -11,13 +11,14 @@ const components = plugin(function ({ addComponents, theme }) {
     "radial-gradient(circle, var(--color-border) 0%, rgba(0,0,0,0) 70%) 1 100%";
   addComponents({
     ".card": {
-      transition: "box-shadow 200ms ease-in , top 300ms ease-in",
+      transition: "box-shadow 300ms ease-in , top 300ms ease-in, transform 200ms ease-in",
       position: "relative",
       top: "0",
       "&:hover": {
-        border: "1px solid var(--color-divider)",
-        "box-shadow": "0px 0px 0px 4px #FFB24E",
-        top: "24px",
+        border: "1px solid var(--color-border)",
+        "box-shadow": "1px 1px 2px 0px #4f6986",
+        // top: "10px",
+        transform: 'scale(1.02)',
       },
     },
     ".hoverable-card": {

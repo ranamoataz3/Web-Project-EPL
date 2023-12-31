@@ -1,4 +1,4 @@
-Data = {
+const Data = {
   teams: [
     {
       id: "Pyramids",
