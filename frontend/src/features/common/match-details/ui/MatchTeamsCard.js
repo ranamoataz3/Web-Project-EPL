@@ -9,7 +9,7 @@ const TeamsCard = (props) => {
   const awayTeam = teams.find((team) => team.id === match.awayTeam);
   return (
     <div className="flex flex-row gap-2 justify-between items-center">
-      <div className="flex flex-col md:flex-row gap-x-8 gap-y-3 md:items-center items-start md:w-[35%] w-[40%]">
+      <div className="flex flex-col md:flex-row lg:gap-x-8 gap-x-4 gap-y-3 md:items-center items-start md:w-[35%] w-[40%]">
         <img
           src={homeTeam.logo}
           alt="team logo"
@@ -18,7 +18,7 @@ const TeamsCard = (props) => {
         <p className="font-semibold h6 text-font-1">{match.homeTeam}</p>
       </div>
       <h2 className="h2 text-font-3  text-center">Vs.</h2>
-      <div className="flex flex-col md:flex-row-reverse gap-x-8 gap-y-3 md:justify-start md:items-center items-end md:w-[35%] w-[40%] text-right">
+      <div className="flex flex-col md:flex-row-reverse lg:gap-x-8 gap-x-4 gap-y-3 md:justify-start md:items-center items-end md:w-[35%] w-[40%] text-right">
         <img
           src={awayTeam.logo}
           alt="team logo"
