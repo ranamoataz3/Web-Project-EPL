@@ -11,7 +11,6 @@ import localStorage from "redux-persist/es/storage";
 
 const AddStadium = () => {
   const [viewDialog, setViewDialog] = useState(null);
-  localStorage.
   const initialValues = {
     name: "",
     width: "",
