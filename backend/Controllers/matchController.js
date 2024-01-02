@@ -2,6 +2,7 @@ const Teams=require("../Teams");
 const Match=require("../Models/Match");
 const Stadium=require("../Models/Stadium");
 const Official=require("../Models/Official");
+const User=require("../Models/User");
 
 
 // add a match
@@ -77,6 +78,11 @@ const addMatch = async (req, res) => {
         // check if the away team is already assigned to a match at the same time (within 2 hours)
         if (await Match.findOne({ $or: [{ homeTeam: req.body.awayTeam }, { awayTeam: req.body.awayTeam }], dateTime: { $gte:  time1, $lte: time2} })) {
             return res.status(400).send("The away team is already assigned to a match at the same time");
+        }
+
+        // if the home team entered is the same as the away team entered
+        if (req.body.homeTeam == req.body.awayTeam) {
+            return res.status(400).send("The home team and the away team cannot be the same");
         }
 
 
@@ -204,6 +210,13 @@ const reserveSeats=async (req,res)=>{
     for (let i = 0; i < seats.length; i++) {
         match.seats[(seats[i].row)-1][(seats[i].column)-1] = true;
     }
+
+    // push the match to the user matches array 
+    User.findById(req.userId).then(user => {    
+        user.matches.push(match);
+        user.save();
+    }).catch(err => console.error(err.message));
+
     await match.save();
     return res.status(200).send("Seats reserved successfully");
 };
