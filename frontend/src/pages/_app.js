@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { useState, useEffect } from "react";
+import Loader from "@/core/components/spinner/Loader";
 // import store from "@/storage/store/Store";
 
 const montserrat = Montserrat({
@@ -68,7 +69,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     // Ensure localStorage is available before creating the persistor
     if (typeof window !== "undefined") {
-      const tempstore = require("@/storage/store/Store").default
+      const tempstore = require("@/storage/store/Store").default;
       setStore(tempstore); // Importing store dynamically
       const temppersistor = persistStore(tempstore);
       setPersistor(temppersistor);
@@ -80,8 +81,11 @@ export default function App({ Component, pageProps }) {
     <>
       {persistorReady ? (
         <Provider store={store}>
-          <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-            <div className={montserrat.variable}>
+          <PersistGate
+            loading={<Loader color="#024593" />}
+            persistor={persistor}
+          >
+            <div className={`${montserrat.variable} h-[100%]`}>
               <Layout>
                 <Component {...pageProps} />
               </Layout>
@@ -89,9 +93,8 @@ export default function App({ Component, pageProps }) {
           </PersistGate>
         </Provider>
       ) : (
-        <div>Loading...</div>
+        null
       )}
     </>
   );
 }
-
