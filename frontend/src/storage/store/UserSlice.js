@@ -9,7 +9,7 @@ const userSlice = createSlice({
     email: "",
     firstName: "",
     lastName: "",
-    isAdmin: false,
+    isAdmin: true,
   },
   reducers: {
     login: (state, action) => {

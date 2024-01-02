@@ -51,7 +51,7 @@ const NavData = {
       },
       {
         name: "Add Stadium",
-        route: "/",
+        route: "/stadium/add-stadium",
         id: "addstadium",
       },
     ],
