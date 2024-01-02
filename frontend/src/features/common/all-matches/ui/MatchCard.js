@@ -12,7 +12,7 @@ const MatchCard = (props) => {
   return (
     <Link
       href={`/matches/${match._id}`}
-      className="p-4 block card w-auto h-auto rounded-md border-2 border-border border-solid"
+      className="p-4 block card w-auto h-auto rounded-md border-2 border-border border-solid bg-white"
     >
       <div className="flex flex-row gap-2 justify-between md:items-center md:text-center">
         <div className="flex flex-col md:flex-row gap-x-5 gap-y-3 md:items-center items-start md:w-[35%] w-[40%]">
