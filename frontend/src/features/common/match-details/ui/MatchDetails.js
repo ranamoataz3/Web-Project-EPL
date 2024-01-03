@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "@/API/axios";
 import routes from "@/API/routes";
+import ViewStadium from "../../stadium/ui/ViewStadium";
 
 const MatchDetails = () => {
   const router = useRouter();
@@ -42,7 +43,8 @@ const MatchDetails = () => {
           </p>
           <TeamsCard match={match} />
           <MatchTime match={match} />
-          <MatchOfficials match={match} />{" "}
+          <MatchOfficials match={match} />
+          <ViewStadium stadium={match.stadium} seats={match.seats} />
         </>
       ) : (
         <h1 className="text-center text-font-2"> Match Not Found</h1>
