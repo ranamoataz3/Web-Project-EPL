@@ -1,25 +1,7 @@
 const routes = {
-    signUp: "/user/signUp",
-    logIn: "/user/login",
-    events: "/api/events",
-    paginatedevents: "/api/events/paginated",
-    getUser: "/user",
-    userToCreator: "/user/to-creator",
-    promocode: "/promocode",
-    forgotPassword: "/auth/forgot-password",
-    creatorToUser: "/user/to-attendee",
-    resetPassword: "/auth/reset-password",
-    tickets: "/ticket",
-    placeOrder: "/order",
-    eventSoldTickets: "/getTicketsSoldForEvent",
-    eventSalesSummary: "/getSalesSummaryReport",
-    eventURL: "/getEventUrl",
-    eventSalesByTicketType: "/getSalesByTicketTypeDashboard",
-    eventRecentOrder: "/getOrderSummaryReportMostRecent",
-    createEvent: "/api/events",
-    sendNotificationToken: "/user/notification",
-    getAllEventsCreator: "/api/events/",
-    updateEvent: "/api/events/",
-  };
-  export default routes;
-  
+  signUp: "/user/signUp",
+  logIn: "/user/login",
+  matches: "/match/getMatches",
+  match: "/match/getMatch/",
+};
+export default routes;
