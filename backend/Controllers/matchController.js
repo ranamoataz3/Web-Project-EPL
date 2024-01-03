@@ -188,11 +188,15 @@ const reserveSeats=async (req,res)=>{
     if (!match) {
         return res.status(404).send("Match not found");
     }
-
 // array of objects row and column, each object represents a seat
     const seats=req.body.seats;
     // check if the seats are valid
     // check if the seats are in the seats matrix
+
+    // the request should contain credit card number and pin number
+    if (!req.body.creditCardNumber || !req.body.pinNumber) {
+        return res.status(400).send("Please enter your credit card number and your pin number");
+    }
 
     // out of bounds error
     for (let i = 0; i < seats.length; i++) {
@@ -217,8 +221,13 @@ const reserveSeats=async (req,res)=>{
         user.save();
     }).catch(err => console.error(err.message));
 
+
+    const getNumericRepresentation = str => [...str].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const ticketNumber=getNumericRepresentation(req.params.id) * getNumericRepresentation(req.userId) * getNumericRepresentation(String(req.body.creditCardNumber)) * getNumericRepresentation(String(req.body.pinNumber));
+
     await match.save();
-    return res.status(200).send("Seats reserved successfully");
+    return res.status(200).send({message: "Seats reserved successfully", ticketNumber:ticketNumber});
+
 };
 
 
