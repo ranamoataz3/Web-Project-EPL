@@ -11,7 +11,7 @@ const matchSchema = new Schema({
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 20
+        maxlength: 100
     },
 
     awayTeam:
@@ -19,7 +19,7 @@ const matchSchema = new Schema({
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 20
+        maxlength: 100
     },
 
     stadium:
