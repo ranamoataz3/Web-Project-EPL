@@ -1,7 +1,11 @@
 import Button from "@/core/components/button/Button";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const Banner = () => {
+  const router = useRouter();
+  const user = useSelector((state) => state.user);
   return (
     <div
       id="homebanner"
@@ -21,14 +25,14 @@ const Banner = () => {
           <h6 className="weak h6">Book your Match Now!</h6>
         </div>
 
-        <Link href="/auth/sign-up" className="p-4 text-center centered">
+        {!user.loggedIn ? <Link href="/auth/sign-up" className="p-4 text-center centered">
           <Button
             className="centered max-w-[100%]"
             btnclassName="rounded-3xl w-[130px]"
           >
             Sign Up
           </Button>
-        </Link>
+        </Link> : null}
       </div>
       <div className="flex-1 flex justify-end pr-6">
         <img

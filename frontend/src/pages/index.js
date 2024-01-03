@@ -1,9 +1,9 @@
-// import FanHome from "@features/fans/home/index";
+import FanHome from "@features/fans/home/index";
 
-// export default FanHome;
+export default FanHome;
 
 
-import Banner from "@/features/admin/home/banner";
+// import Banner from "@/features/admin/home/banner";
 
-export default Banner
+// export default Banner
 

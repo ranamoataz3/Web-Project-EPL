@@ -9,7 +9,7 @@ const userSlice = createSlice({
     email: "",
     firstName: "",
     lastName: "",
-    isAdmin: true,
+    isAdmin: false,
   },
   reducers: {
     login: (state, action) => {
@@ -20,7 +20,7 @@ const userSlice = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.isAdmin = action.payload.isAdmin;
-      window.location.reload();
+
     },
     signup: (state) => {
       state.loggedIn = false;
@@ -33,7 +33,9 @@ const userSlice = createSlice({
       state.email = "";
       state.firstName = "";
       state.lastName = "";
+      state.isAdmin = false;
       localStorage.clear();
+      window.location.reload();
     },
     admin: (state, action) => {
       state.isAdmin = action.payload.isAdmin;

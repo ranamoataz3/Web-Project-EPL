@@ -7,10 +7,15 @@ import InputField from "@/core/components/web-form/input/InputField";
 import * as Yup from "yup";
 import Button from "@/core/components/button/Button";
 import DialogBox from "@core/components/dialogBox/dialogBox";
-import localStorage from "redux-persist/es/storage";
+import axios from "@/API/axios";
+import routes from "@/API/routes";
 
 const AddStadium = () => {
   const [viewDialog, setViewDialog] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [img, setImg] = useState(null);
+
   const initialValues = {
     name: "",
     width: "",
@@ -30,8 +35,33 @@ const AddStadium = () => {
   });
 
   const handleSubmit = (data, { setErrors }) => {
-    setViewDialog(true);
-    console.log(data);
+    async function sendData(data) {
+      console.log(data);
+      try {
+        const response = await axios.post(routes.stadium, data);
+        console.log(response);
+        setMsg("Stadium Added Successfully");
+        setTitle("Success");
+        setImg("/imgs/check.png");
+        setViewDialog(true);
+      } catch (err) {
+        console.log(err.response.data.message);
+        setMsg(err.response.data.message);
+        setTitle("Failure");
+        setImg("/imgs/cancel.png");
+        setViewDialog(true);
+      }
+    }
+
+    sendData(data);
+  };
+
+  const handlecloseDialog = () => {
+    setViewDialog(false);
+    setMsg(null);
+    setTitle(null);
+    setImg(null);
+    window.location.reload();
   };
 
   return (
@@ -40,12 +70,12 @@ const AddStadium = () => {
         {viewDialog && (
           <DialogBox
             description={{
-              icon: "/imgs/check.png",
-              title: "Success",
-              message: "Stadium Added Successfully",
-              titleColor:"#323133"
+              icon: img,
+              title: title,
+              message: msg,
+              titleColor: "#323133",
             }}
-            onClose={() => setViewDialog(false)}
+            onClose={() => handlecloseDialog()}
           />
         )}
       </>
