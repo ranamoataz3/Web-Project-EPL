@@ -19,13 +19,13 @@ const NavData = {
     components: {
       login: (
         <Link href="/auth/sign-in" className="p-4 text-center centered">
-          <Button className="centered max-w-[100%] " btnclassName="rounded-sm">
+          <Button className="centered max-w-[100%] " btnclassName="rounded-sm bg-primary">
             Sign In
           </Button>
         </Link>
       ),
       logout: (
-        <Button className="centered max-w-[100%] " btnclassName="rounded-sm">
+        <Button className="centered max-w-[100%] " btnclassName="rounded-sm bg-primary">
           Log Out
         </Button>
       ),
@@ -58,7 +58,7 @@ const NavData = {
     components: {
       login: null,
       logout: (
-        <Button className="centered max-w-[100%] " btnclassName="rounded-sm">
+        <Button className="centered max-w-[100%] " btnclassName="rounded-sm bg-primary">
           Log Out
         </Button>
       ),

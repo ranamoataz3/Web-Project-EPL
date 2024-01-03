@@ -8,6 +8,7 @@ const Button = (props) => {
       <button
         className={`${styles.button} w-full centered ${props.btnclassName}`}
         type={props.type ? props.type : "button"}
+        onClick={props.onclick}
       >
         {props.children}
       </button>
