@@ -16,9 +16,9 @@ const NavData = {
         id: "matches",
       },
     ],
-    components: [
+    components: 
       {
-        component: (
+        login: (
           <Link href="/auth/sign-in" className="p-4 text-center centered">
             <Button
               className="centered max-w-[100%] "
@@ -28,8 +28,17 @@ const NavData = {
             </Button>
           </Link>
         ),
+        logout: (
+            <Button
+              className="centered max-w-[100%] "
+              btnclassName="rounded-sm"
+            >
+              Log Out
+            </Button>
+
+        ),
       },
-    ],
+    
   },
   admin: {
     items: [

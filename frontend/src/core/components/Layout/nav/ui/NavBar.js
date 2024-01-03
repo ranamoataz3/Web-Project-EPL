@@ -7,13 +7,20 @@ import Hamburger from "@/core/components/hamburger/Hamburger";
 // pages/index.js (or any other component)
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { userActions } from "@/storage/store/UserSlice";
 
 const NavBar = ({ openmenu, setOpenmenu }) => {
   const router = useRouter();
   const currentPath = router.pathname;
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const navItems = user.isAdmin ? NavData.admin : NavData.fan;
+
+  const handleLogout = () => {
+    dispatch(userActions.logout());
+  };
 
   return (
     <nav id="nav" className={styles.container}>
@@ -40,11 +47,16 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
             </Link>
           );
         })}
-        {navItems.components
-          ? navItems.components.map((element) => {
-              return element.component;
-            })
-          : null}
+        {navItems.components && !user.loggedIn ? (
+          navItems.components.login
+        ) : (
+          <li
+            className="p-4 text-center centered"
+            onClick={() => handleLogout()}
+          >
+            {navItems.components.logout}{" "}
+          </li>
+        )}
       </ul>
 
       <div className={styles.menuicon}>
@@ -69,11 +81,16 @@ const NavBar = ({ openmenu, setOpenmenu }) => {
             </Link>
           );
         })}
-        {navItems.components
-          ? navItems.components.map((element) => {
-              return element.component;
-            })
-          : null}
+        {navItems.components && !user.loggedIn ? (
+          navItems.components.login
+        ) : (
+          <li
+            className="p-4 text-center centered"
+            onClick={() => handleLogout()}
+          >
+            {navItems.components.logout}{" "}
+          </li>
+        )}
       </ul>
     </nav>
   );

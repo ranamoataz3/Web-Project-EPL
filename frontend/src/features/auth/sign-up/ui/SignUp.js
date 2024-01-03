@@ -11,10 +11,15 @@ import { Formik } from "formik";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import axios from "@/API/axios";
+import routes from "@/API/routes";
+import { useDispatch } from "react-redux";
+import { userActions } from "@/storage/store/UserSlice";
 
 const SignUp = () => {
   const user = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const genderOptions = [
     { label: "Male", value: "male", selected: true },
@@ -23,10 +28,10 @@ const SignUp = () => {
 
   const initialValues = {
     username: "",
-    emailAddress: "",
+    email: "",
     firstName: "",
     lastName: "",
-    birthdate: moment().subtract(10, "years").format("YYYY-MM-DD"),
+    birthDate: moment().subtract(10, "years").format("YYYY-MM-DD"),
     gender: "male",
     city: "",
     address: "",
@@ -35,13 +40,13 @@ const SignUp = () => {
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
-    emailAddress: Yup.string()
+    email: Yup.string()
       .min(3)
       .email("Invalid email address")
       .required(" Email field is required"),
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
-    birthdate: Yup.date()
+    birthDate: Yup.date()
       .min(
         moment("1930-01-01").format("YYYY-MM-DD"),
         "Birth date must be later than " +
@@ -59,15 +64,38 @@ const SignUp = () => {
   });
 
   const handleSubmit = (data, { setErrors }) => {
-    let birthdate = new Date(data.birthdate);
-    data.birthdate = birthdate;
+    let birthDate = new Date(data.birthDate);
+    data.birthDate = birthDate;
     console.log(data);
+
+    async function sendData(data) {
+      console.log(data);
+      try {
+        const response = await axios.post(routes.signUp, data);
+        console.log(response);
+        dispatch(
+          userActions.login({
+            id: response.data.user._id,
+            token: response.data.token,
+            email: response.data.user.email,
+            firstName: response.data.user.firstName,
+            lastName: response.data.user.lastName,
+            isAdmin: response.data.user.isAdmin,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    sendData(data);
   };
 
   useEffect(() => {
     if (user.loggedIn) {
-      router.push('/');
+      router.push("/");
     }
+    console.log(user);
   }, []);
 
   return (
@@ -84,7 +112,7 @@ const SignUp = () => {
       />
       <InputField
         label="Email Address"
-        name="emailAddress"
+        name="email"
         placeholder="Enter your email address"
         className="bg-neutral"
       />
@@ -104,8 +132,8 @@ const SignUp = () => {
       <RadioButton label="Gender" name="gender" options={genderOptions} />
       <DateInput
         label="Birth Date"
-        name="birthdate"
-        date={initialValues.birthdate}
+        name="birthDate"
+        date={initialValues.birthDate}
       />
       <InputField
         label="City"
