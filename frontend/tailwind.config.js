@@ -11,14 +11,15 @@ const components = plugin(function ({ addComponents, theme }) {
     "radial-gradient(circle, var(--color-border) 0%, rgba(0,0,0,0) 70%) 1 100%";
   addComponents({
     ".card": {
-      transition: "box-shadow 300ms ease-in , top 300ms ease-in, transform 200ms ease-in",
+      transition:
+        "box-shadow 300ms ease-in , top 300ms ease-in, transform 200ms ease-in",
       position: "relative",
       top: "0",
       "&:hover": {
         border: "1px solid var(--color-border)",
         "box-shadow": "1px 1px 2px 0px #4f6986",
         // top: "10px",
-        transform: 'scale(1.02)',
+        transform: "scale(1.02)",
       },
     },
     ".hoverable-card": {
@@ -203,6 +204,7 @@ module.exports = {
       },
       colors: {
         primary: "var(--color-primary)",
+        "primary-hover": "var(--color-primary-hover)",
         "con-primary": "var(--color-on-primary)",
         "primary-container": "var(--color-primary-container)",
         "primary-container-lighter": "var(--color-primary-container-lighter)",
@@ -227,6 +229,7 @@ module.exports = {
         white: "var(--color-white)",
         black: "var(--color-black)",
         green: "var(--color-green)",
+        "green-hover": "var(--color-green-hover)",
         red: "var(--color-red)",
         yellow: "var(--color-yellow)",
         orange: "var(--color-orange)",

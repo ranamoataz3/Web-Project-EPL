@@ -27,7 +27,7 @@ const MatchDetails = () => {
 
   const navigatetoReservation = () => {
     if (user.loggedIn) {
-      router.push(`/reservation/${match._id}`);
+      router.push(`/matches/reservation/${match._id}`);
     } else {
       router.push("/auth/sign-in");
     }
@@ -70,7 +70,7 @@ const MatchDetails = () => {
               {showStadium ? "Hide Stadium" : "Show Stadium"}
             </Button>
             <Button
-              btnclassName="rounded-md w-32 bg-font-5 text-white "
+              btnclassName="rounded-md w-32 bg-font-3 text-white "
               className="flex items-center justify-center w-fit"
               onclick={navigatetoReservation}
             >
