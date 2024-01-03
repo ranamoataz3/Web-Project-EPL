@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "@/API/axios";
 import routes from "@/API/routes";
+import ViewStadium from "../../stadium/ui/ViewStadium";
+import Button from "@/core/components/button/Button";
 
 const MatchDetails = () => {
   const router = useRouter();
@@ -16,8 +18,20 @@ const MatchDetails = () => {
   // const match = matches.find((match) => match._id === id);
   const user = useSelector((state) => state.user);
   const isAdmin = user.isAdmin;
-
   const [match, setMatch] = useState(null);
+  const [showStadium, setShowStadium] = useState(false);
+
+  const toggleShowStadium = () => {
+    setShowStadium(!showStadium);
+  };
+
+  const navigatetoReservation = () => {
+    if (user.loggedIn) {
+      router.push(`/matches/reservation/${match._id}`);
+    } else {
+      router.push("/auth/sign-in");
+    }
+  };
 
   async function getMatches() {
     try {
@@ -42,7 +56,27 @@ const MatchDetails = () => {
           </p>
           <TeamsCard match={match} />
           <MatchTime match={match} />
-          <MatchOfficials match={match} />{" "}
+          <MatchOfficials match={match} />
+
+          {showStadium ? (
+            <ViewStadium stadium={match.stadium} seats={match.seats} />
+          ) : null}
+          <div className="flex justify-center gap-11">
+            <Button
+              btnclassName="rounded-md w-32 bg-primary text-white"
+              className="flex items-center justify-center w-fit"
+              onclick={toggleShowStadium}
+            >
+              {showStadium ? "Hide Stadium" : "Show Stadium"}
+            </Button>
+            <Button
+              btnclassName="rounded-md w-32 bg-font-3 text-white "
+              className="flex items-center justify-center w-fit"
+              onclick={navigatetoReservation}
+            >
+              Reserve a Seat
+            </Button>
+          </div>
         </>
       ) : (
         <h1 className="text-center text-font-2"> Match Not Found</h1>

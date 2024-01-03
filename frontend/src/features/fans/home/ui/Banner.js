@@ -28,7 +28,7 @@ const Banner = () => {
         {!user.loggedIn ? <Link href="/auth/sign-up" className="p-4 text-center centered">
           <Button
             className="centered max-w-[100%]"
-            btnclassName="rounded-3xl w-[130px]"
+            btnclassName="rounded-3xl w-[130px] bg-primary"
           >
             Sign Up
           </Button>

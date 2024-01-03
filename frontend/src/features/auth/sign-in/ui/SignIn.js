@@ -137,7 +137,7 @@ const SignIn = () => {
         <Button
           type="submit"
           className="centered max-w-[100%]"
-          btnclassName="rounded-sm"
+          btnclassName="rounded-sm bg-primary"
         >
           Sign In
         </Button>

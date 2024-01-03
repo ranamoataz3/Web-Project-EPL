@@ -10,37 +10,42 @@ import DialogBox from "@core/components/dialogBox/dialogBox";
 import axios from "@/API/axios";
 import routes from "@/API/routes";
 
-const AddStadium = () => {
+const ReservationForm = (props) => {
+  const router = useRouter();
+  const { id } = router.query;
+  // Your component logic here
+
   const [viewDialog, setViewDialog] = useState(null);
   const [msg, setMsg] = useState(null);
   const [title, setTitle] = useState(null);
   const [img, setImg] = useState(null);
 
   const initialValues = {
-    name: "",
-    width: "",
-    height: "",
+    seats: props.seats,
+    creditCardNumber: "",
+    pinNumber: "",
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    width: Yup.number()
-      .min(5, "Width must be at least 5")
-      .max(15, "Width must be at most 15")
-      .required("Width is required"),
-    height: Yup.number()
-      .min(5, "Height must be at least 5")
-      .max(10, "Height must be at most 10")
-      .required("Height is required"),
+    creditCardNumber: Yup.string()
+      .matches(/^\d{15,16}$/, "Credit card must be 15 or 16 digits")
+      .required("Credit card number is required"),
+    pinNumber: Yup.string()
+      .matches(/^\d{4}$/, "PIN must be exactly 4 digits")
+      .required("PIN is required"),
   });
 
   const handleSubmit = (data, { setErrors }) => {
     async function sendData(data) {
       console.log(data);
       try {
-        const response = await axios.post(routes.stadium, data);
+        const response = await axios.post(routes.reserve + id, data);
         console.log(response);
-        setMsg("Stadium Added Successfully");
+        setMsg(
+          response.data.message +
+            " and the ticket number is : " +
+            response.data.ticketNumber
+        );
         setTitle("Success");
         setImg("/imgs/check.png");
         setViewDialog(true);
@@ -54,6 +59,7 @@ const AddStadium = () => {
     }
 
     sendData(data);
+    // console.log(data);
   };
 
   const handlecloseDialog = () => {
@@ -61,7 +67,7 @@ const AddStadium = () => {
     setMsg(null);
     setTitle(null);
     setImg(null);
-    window.location.reload();
+    router.push("/matches/" + id);
   };
 
   return (
@@ -86,22 +92,17 @@ const AddStadium = () => {
         handleSubmit={handleSubmit}
       >
         <InputField
-          label="Name"
-          name="name"
-          placeholder="Enter Stadium Name"
+          label="Credit Card Number"
+          name="creditCardNumber"
+          placeholder="Enter your credit card number"
           className="bg-neutral"
         />
         <InputField
-          label="Height"
-          name="height"
-          placeholder="Enter Stadium Height"
+          label="Pin Number"
+          name="pinNumber"
+          placeholder="Enter your pin number"
           className="bg-neutral"
-        />
-        <InputField
-          label="Width"
-          name="width"
-          placeholder="Enter Stadium Width"
-          className="bg-neutral"
+          type="password"
         />
         <Button
           type="submit"
@@ -115,4 +116,4 @@ const AddStadium = () => {
   );
 };
 
-export default AddStadium;
+export default ReservationForm;

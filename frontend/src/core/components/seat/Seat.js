@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const Seat = () => {
-    return (
-        <div>
-            {/* Your seat component code here */}
-        </div>
-    );
+const Seat = (props) => {
+  return (
+    <div onClick={props.onClick} className={`${props.className} py-10 px-10 rounded-md max-w-[96px] text-white font-semibold`}>
+      {props.children}
+    </div>
+  );
 };
 
 export default Seat;

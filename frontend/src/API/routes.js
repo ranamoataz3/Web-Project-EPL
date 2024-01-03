@@ -3,6 +3,7 @@ const routes = {
   logIn: "/user/login",
   matches: "/match/getMatches",
   match: "/match/getMatch/",
-  stadium:"/stadium/addStadium"
+  stadium: "/stadium/addStadium",
+  reserve: "/match/reserveSeats/",
 };
 export default routes;
