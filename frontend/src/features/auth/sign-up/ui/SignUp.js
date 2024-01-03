@@ -15,11 +15,17 @@ import axios from "@/API/axios";
 import routes from "@/API/routes";
 import { useDispatch } from "react-redux";
 import { userActions } from "@/storage/store/UserSlice";
+import DialogBox from "@core/components/dialogBox/dialogBox";
 
 const SignUp = () => {
   const user = useSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [viewDialog, setViewDialog] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [img, setImg] = useState(null);
+  const [response, setResponse] = useState(null);
 
   const genderOptions = [
     { label: "Male", value: "male", selected: true },
@@ -73,22 +79,53 @@ const SignUp = () => {
       try {
         const response = await axios.post(routes.signUp, data);
         console.log(response);
-        dispatch(
-          userActions.login({
-            id: response.data.user._id,
-            token: response.data.token,
-            email: response.data.user.email,
-            firstName: response.data.user.firstName,
-            lastName: response.data.user.lastName,
-            isAdmin: response.data.user.isAdmin,
-          })
-        );
+        setMsg("Signed Up Successfully");
+        setTitle("Success");
+        setImg("/imgs/check.png");
+        setResponse(response);
+        setViewDialog(true);
+        // dispatch(
+        //   userActions.login({
+        //     id: response.data.user._id,
+        //     token: response.data.token,
+        //     email: response.data.user.email,
+        //     firstName: response.data.user.firstName,
+        //     lastName: response.data.user.lastName,
+        //     isAdmin: response.data.user.isAdmin,
+        //   })
+        // );
       } catch (err) {
         console.log(err);
+        console.log(err);
+        setMsg(err.response.data);
+        setTitle("Failure");
+        setImg("/imgs/cancel.png");
+        setResponse(false);
+        setViewDialog(true);
       }
     }
 
     sendData(data);
+  };
+
+  const handlecloseDialog = () => {
+    setViewDialog(false);
+    setMsg(null);
+    setTitle(null);
+    setImg(null);
+    if (response) {
+      dispatch(
+        userActions.login({
+          id: response.data.user._id,
+          token: response.data.token,
+          email: response.data.user.email,
+          firstName: response.data.user.firstName,
+          lastName: response.data.user.lastName,
+          isAdmin: response.data.user.isAdmin,
+        })
+      );
+    }
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -99,73 +136,89 @@ const SignUp = () => {
   }, []);
 
   return (
-    <AuthCard
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      handleSubmit={handleSubmit}
-    >
-      <InputField
-        label="UserName"
-        name="username"
-        placeholder="Enter your username"
-        className="bg-neutral"
-      />
-      <InputField
-        label="Email Address"
-        name="email"
-        placeholder="Enter your email address"
-        className="bg-neutral"
-      />
-
-      <InputField
-        label="First Name"
-        name="firstName"
-        placeholder="Enter your First Name"
-        className="bg-neutral"
-      />
-      <InputField
-        label="Last Name"
-        name="lastName"
-        placeholder="Enter your Last Name"
-        className="bg-neutral"
-      />
-      <RadioButton label="Gender" name="gender" options={genderOptions} />
-      <DateInput
-        label="Birth Date"
-        name="birthDate"
-        date={initialValues.birthDate}
-      />
-      <InputField
-        label="City"
-        name="city"
-        placeholder="Enter your City"
-        className="bg-neutral"
-      />
-      <InputField
-        label="Address"
-        name="address"
-        placeholder="Enter your Address"
-        className="bg-neutral"
-      />
-
-      <InputField
-        label="Password"
-        name="password"
-        placeholder="Enter your password"
-        className="bg-neutral"
-        type="password"
-      />
-      <Button
-        type="submit"
-        className="centered max-w-[100%]"
-        btnclassName="rounded-sm"
+    <>
+      {" "}
+      <>
+        {viewDialog && (
+          <DialogBox
+            description={{
+              icon: img,
+              title: title,
+              message: msg,
+              titleColor: "#323133",
+            }}
+            onClose={() => handlecloseDialog()}
+          />
+        )}
+      </>
+      <AuthCard
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        handleSubmit={handleSubmit}
       >
-        Sign UP
-      </Button>
-      <Link href="/auth/sign-in" className="block centered mt-4">
-        Already Have an Account ?
-      </Link>
-    </AuthCard>
+        <InputField
+          label="UserName"
+          name="username"
+          placeholder="Enter your username"
+          className="bg-neutral"
+        />
+        <InputField
+          label="Email Address"
+          name="email"
+          placeholder="Enter your email address"
+          className="bg-neutral"
+        />
+
+        <InputField
+          label="First Name"
+          name="firstName"
+          placeholder="Enter your First Name"
+          className="bg-neutral"
+        />
+        <InputField
+          label="Last Name"
+          name="lastName"
+          placeholder="Enter your Last Name"
+          className="bg-neutral"
+        />
+        <RadioButton label="Gender" name="gender" options={genderOptions} />
+        <DateInput
+          label="Birth Date"
+          name="birthDate"
+          date={initialValues.birthDate}
+        />
+        <InputField
+          label="City"
+          name="city"
+          placeholder="Enter your City"
+          className="bg-neutral"
+        />
+        <InputField
+          label="Address"
+          name="address"
+          placeholder="Enter your Address"
+          className="bg-neutral"
+        />
+
+        <InputField
+          label="Password"
+          name="password"
+          placeholder="Enter your password"
+          className="bg-neutral"
+          type="password"
+        />
+        <Button
+          type="submit"
+          className="centered max-w-[100%]"
+          btnclassName="rounded-sm"
+        >
+          Sign UP
+        </Button>
+        <Link href="/auth/sign-in" className="block centered mt-4">
+          Already Have an Account ?
+        </Link>
+      </AuthCard>
+    </>
   );
 };
 
