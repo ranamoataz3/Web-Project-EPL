@@ -8,25 +8,54 @@ import Button from "@/core/components/button/Button";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import axios from "@/API/axios";
+import routes from "@/API/routes";
+import { useDispatch } from "react-redux";
+import { userActions } from "@/storage/store/UserSlice";
 
 const SignIn = () => {
   const user = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const initialValues = {
-    emailAddress: "",
+    email: "",
     password: "",
   };
 
   const validationSchema = Yup.object().shape({
-    emailAddress: Yup.string()
+    email: Yup.string()
       .min(3)
       .email("Please enter a valid email address")
       .required("Please enter a valid email address"),
     password: Yup.string().required("Password is required"),
   });
 
-  const handleSubmit = (data, { setErrors }) => {};
+  const handleSubmit = (data, { setErrors }) => {
+    console.log(data);
+
+    async function sendData(data) {
+      console.log(data);
+      try {
+        const response = await axios.post(routes.logIn, data);
+        console.log(response);
+        dispatch(
+          userActions.login({
+            id: response.data.user._id,
+            token: response.data.token,
+            email: response.data.user.email,
+            firstName: response.data.user.firstName,
+            lastName: response.data.user.lastName,
+            isAdmin: response.data.user.isAdmin,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    sendData(data);
+  };
 
   useEffect(() => {
     if (user.loggedIn) {
@@ -42,7 +71,7 @@ const SignIn = () => {
     >
       <InputField
         label="Email Address"
-        name="emailAddress"
+        name="email"
         placeholder="Enter your email address"
         className="bg-neutral"
       />

@@ -16,29 +16,20 @@ const NavData = {
         id: "matches",
       },
     ],
-    components: 
-      {
-        login: (
-          <Link href="/auth/sign-in" className="p-4 text-center centered">
-            <Button
-              className="centered max-w-[100%] "
-              btnclassName="rounded-sm"
-            >
-              Sign In
-            </Button>
-          </Link>
-        ),
-        logout: (
-            <Button
-              className="centered max-w-[100%] "
-              btnclassName="rounded-sm"
-            >
-              Log Out
-            </Button>
-
-        ),
-      },
-    
+    components: {
+      login: (
+        <Link href="/auth/sign-in" className="p-4 text-center centered">
+          <Button className="centered max-w-[100%] " btnclassName="rounded-sm">
+            Sign In
+          </Button>
+        </Link>
+      ),
+      logout: (
+        <Button className="centered max-w-[100%] " btnclassName="rounded-sm">
+          Log Out
+        </Button>
+      ),
+    },
   },
   admin: {
     items: [
@@ -64,7 +55,14 @@ const NavData = {
         id: "addstadium",
       },
     ],
-    components: [],
+    components: {
+      login: null,
+      logout: (
+        <Button className="centered max-w-[100%] " btnclassName="rounded-sm">
+          Log Out
+        </Button>
+      ),
+    },
   },
 };
 

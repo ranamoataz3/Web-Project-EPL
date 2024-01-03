@@ -1,6 +1,6 @@
 const routes = {
     signUp: "/user/signUp",
-    logIn: "/auth/login",
+    logIn: "/user/login",
     events: "/api/events",
     paginatedevents: "/api/events/paginated",
     getUser: "/user",
