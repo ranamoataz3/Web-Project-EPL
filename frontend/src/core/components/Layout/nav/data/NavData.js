@@ -46,7 +46,7 @@ const NavData = {
       },
       {
         name: "Create Match",
-        route: "/",
+        route: "/matches/create-match",
         id: "creatematch",
       },
       {

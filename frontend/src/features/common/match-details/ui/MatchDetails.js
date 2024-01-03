@@ -69,13 +69,15 @@ const MatchDetails = () => {
             >
               {showStadium ? "Hide Stadium" : "Show Stadium"}
             </Button>
-            <Button
-              btnclassName="rounded-md w-32 bg-font-3 text-white "
-              className="flex items-center justify-center w-fit"
-              onclick={navigatetoReservation}
-            >
-              Reserve a Seat
-            </Button>
+            {!isAdmin ? (
+              <Button
+                btnclassName="rounded-md w-32 bg-font-3 text-white "
+                className="flex items-center justify-center w-fit"
+                onclick={navigatetoReservation}
+              >
+                Reserve a Seat
+              </Button>
+            ) : null}
           </div>
         </>
       ) : (

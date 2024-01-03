@@ -11,6 +11,8 @@ import axios from "@/API/axios";
 import routes from "@/API/routes";
 
 const AddStadium = () => {
+  const user = useSelector((state) => state.user);
+  const router = useRouter();
   const [viewDialog, setViewDialog] = useState(null);
   const [msg, setMsg] = useState(null);
   const [title, setTitle] = useState(null);
@@ -63,6 +65,12 @@ const AddStadium = () => {
     setImg(null);
     window.location.reload();
   };
+
+  useEffect(() => {
+    if (!user.isAdmin) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <>

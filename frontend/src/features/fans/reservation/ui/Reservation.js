@@ -9,6 +9,7 @@ import ReservationForm from "./ReservationForm";
 const Reservation = () => {
   // Component logic goes here
   const router = useRouter();
+  const user = useSelector((state) => state.user);
   const { id } = router.query;
   const [match, setMatch] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -25,7 +26,12 @@ const Reservation = () => {
   }
 
   useEffect(() => {
+    if (user.isAdmin) {
+      router.push("/");
+    }
+    else {
     getMatches();
+    }
   }, []);
 
   const getformdata = (seats) => {
