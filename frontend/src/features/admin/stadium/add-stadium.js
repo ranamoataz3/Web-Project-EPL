@@ -14,6 +14,7 @@ const AddStadium = () => {
   const [viewDialog, setViewDialog] = useState(null);
   const [msg, setMsg] = useState(null);
   const [title, setTitle] = useState(null);
+  const [img, setImg] = useState(null);
 
   const initialValues = {
     name: "",
@@ -41,11 +42,13 @@ const AddStadium = () => {
         console.log(response);
         setMsg("Stadium Added Successfully");
         setTitle("Success");
+        setImg("/imgs/check.png");
         setViewDialog(true);
       } catch (err) {
         console.log(err.response.data.message);
         setMsg(err.response.data.message);
         setTitle("Failure");
+        setImg("/imgs/cancel.png");
         setViewDialog(true);
       }
     }
@@ -55,6 +58,9 @@ const AddStadium = () => {
 
   const handlecloseDialog = () => {
     setViewDialog(false);
+    setMsg(null);
+    setTitle(null);
+    setImg(null);
     window.location.reload();
   };
 
@@ -64,7 +70,7 @@ const AddStadium = () => {
         {viewDialog && (
           <DialogBox
             description={{
-              icon: "/imgs/check.png",
+              icon: img,
               title: title,
               message: msg,
               titleColor: "#323133",
